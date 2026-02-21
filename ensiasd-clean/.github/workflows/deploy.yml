@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -26,14 +26,14 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: frontend/package.json
+          cache-dependency-path: ensiasd-clean/frontend/package.json
 
       - name: Install dependencies
-        working-directory: ./frontend
+        working-directory: ./ensiasd-clean/frontend
         run: npm ci
 
       - name: Build
-        working-directory: ./frontend
+        working-directory: ./ensiasd-clean/frontend
         run: npm run build
 
       - name: Setup Pages
@@ -42,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./frontend/dist
+          path: ./ensiasd-clean/frontend/dist
 
   deploy:
     environment:
